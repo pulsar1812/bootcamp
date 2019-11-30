@@ -1,8 +1,8 @@
 import React, { Fragment, useEffect } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Navbar from './components/layout/Navbar';
-
+import Routes from './components/routing/Routes';
 import { loadUser } from './redux/actions/authActions';
 import store from './redux/store';
 import setAuthToken from './utils/setAuthToken';
@@ -21,6 +21,9 @@ const App = () => {
     <Router>
       <Fragment>
         <Navbar />
+        <Switch>
+          <Route component={Routes} />
+        </Switch>
       </Fragment>
     </Router>
   );

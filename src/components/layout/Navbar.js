@@ -1,59 +1,103 @@
 import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
+import {
+  Typography,
+  AppBar,
+  Toolbar,
+  Button,
+  IconButton
+} from '@material-ui/core';
+import MenuIcon from '@material-ui/icons/Menu';
 
 import { logout } from '../../redux/actions/authActions';
 
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1
+  },
+  menuButton: {
+    marginRight: theme.spacing(2)
+  },
+  title: {
+    flexGrow: 1
+  }
+}));
+
 const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
+  const classes = useStyles();
+
   const authLinks = (
-    <ul>
-      <li>
-        <Link to='/profiles'>Bootcamps</Link>
-      </li>
-      <li>
-        <Link to='/posts'>Posts</Link>
-      </li>
-      <li>
-        <Link to='/dashboard'>
-          <i className='fas fa-user' />
-          <span className='hide-sm'> Dashboard</span>
-        </Link>
-      </li>
-      <li>
-        <a onClick={logout} href='#!'>
-          <i className='fas fa-sign-out-alt' />
-          <span className='hide-sm'> Logout</span>
-        </a>
-      </li>
-    </ul>
+    <Fragment>
+      <Button variant='contained' color='primary' href='/bootcamps'>
+        Bootcamps
+      </Button>
+      <Button variant='contained' color='primary' href='/dashboard'>
+        Dashboard
+      </Button>
+      <Button variant='contained' color='primary' href='/logout'>
+        Logout
+      </Button>
+    </Fragment>
+
+    // <ul>
+    //   <li>
+    //     <Link to='/bootcamps'>Bootcamps</Link>
+    //   </li>
+    //   <li>
+    //     <Link to='/posts'>Posts</Link>
+    //   </li>
+    //   <li>
+    //     <Link to='/dashboard'>
+    //       <i className='fas fa-user' />
+    //       <span className='hide-sm'> Dashboard</span>
+    //     </Link>
+    //   </li>
+    //   <li>
+    //     <a onClick={logout} href='#!'>
+    //       <i className='fas fa-sign-out-alt' />
+    //       <span className='hide-sm'> Logout</span>
+    //     </a>
+    //   </li>
+    // </ul>
   );
 
   const guestLinks = (
-    <ul>
-      <li>
-        <Link to='/profiles'>Bootcamps</Link>
-      </li>
-      <li>
-        <Link to='/register'>Register</Link>
-      </li>
-      <li>
-        <Link to='/login'>Login</Link>
-      </li>
-    </ul>
+    <Fragment>
+      <Button variant='contained' color='primary' href='/bootcamps'>
+        Bootcamps
+      </Button>
+      <Button variant='contained' color='primary' href='/login'>
+        Login
+      </Button>
+      <Button variant='contained' color='primary' href='/register'>
+        Register
+      </Button>
+    </Fragment>
   );
 
   return (
-    <nav className='navbar bg-dark'>
-      <h1>
-        <Link to='/'>
-          <i className='fas fa-code'></i> Bootcamp
-        </Link>
-      </h1>
-      {!loading && (
-        <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
-      )}
-    </nav>
+    <div className={classes.root}>
+      <AppBar position='static'>
+        <Toolbar>
+          <IconButton
+            edge='start'
+            className={classes.menuButton}
+            color='inherit'
+            aria-label='menu'
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant='h6' className={classes.title}>
+            Bootcamp
+          </Typography>
+          {!loading && (
+            <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
+          )}
+        </Toolbar>
+      </AppBar>
+    </div>
   );
 };
 
