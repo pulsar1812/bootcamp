@@ -1,20 +1,57 @@
 import React, { Fragment, useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import {
+  Typography,
+  Avatar,
+  Button,
+  CssBaseline,
+  TextField,
+  FormControlLabel,
+  Checkbox,
+  Link,
+  Grid,
+  Box,
+  Container
+} from "@material-ui/core";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import { makeStyles } from "@material-ui/core/styles";
 
 import { setAlert } from '../../redux/actions/alertActions';
 import { register } from '../../redux/actions/authActions';
 
+const useStyles = makeStyles(theme => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main
+  },
+  form: {
+    width: "100%", // Fix IE 11 issue.
+    marginTop: theme.spacing(3)
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2)
+  }
+}));
+
 const Register = ({ isAuthenticated, setAlert, register }) => {
+  const classes = useStyles();
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
-    password2: ''
+    role: ''
   });
 
-  const { name, email, password, password2 } = formData;
+  const { name, email, password, role } = formData;
 
   const handleChange = event => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
@@ -22,11 +59,7 @@ const Register = ({ isAuthenticated, setAlert, register }) => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    if (password !== password2) {
-      setAlert('Passwords do not match', 'danger');
-    } else {
-      register({ name, email, password });
-    }
+    register({ name, email, password, role });
   };
 
   // Redirect if logged in
@@ -58,10 +91,6 @@ const Register = ({ isAuthenticated, setAlert, register }) => {
             value={email}
             onChange={event => handleChange(event)}
           />
-          <small className='form-text'>
-            This site uses Gravatar so if you want a profile image, use a
-            Gravatar email
-          </small>
         </div>
         <div className='form-group'>
           <input
@@ -75,11 +104,10 @@ const Register = ({ isAuthenticated, setAlert, register }) => {
         </div>
         <div className='form-group'>
           <input
-            type='password'
-            placeholder='Confirm Password'
-            name='password2'
-            minLength='6'
-            value={password2}
+            type='text'
+            placeholder='Role'
+            name='role'
+            value={role}
             onChange={event => handleChange(event)}
           />
         </div>
@@ -89,6 +117,74 @@ const Register = ({ isAuthenticated, setAlert, register }) => {
         Already have an account? <Link to='/login'>Sign In</Link>
       </p>
     </Fragment>
+
+<Container component="main" maxWidth="xs">
+<CssBaseline />
+<div className={classes.paper}>
+  <Avatar className={classes.avatar}>
+    <LockOutlinedIcon />
+  </Avatar>
+  <Typography component="h1" variant="h5">
+    Sign up
+  </Typography>
+  <form className={classes.form} noValidate>
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <TextField
+          autoComplete="fname"
+          name="name"
+          variant="outlined"
+          required
+          fullWidth
+          id="name"
+          label="Name"
+          autoFocus
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <TextField
+          variant="outlined"
+          required
+          fullWidth
+          id="email"
+          label="Email Address"
+          name="email"
+          autoComplete="email"
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <TextField
+          variant="outlined"
+          required
+          fullWidth
+          name="password"
+          label="Password"
+          type="password"
+          id="password"
+          autoComplete="current-password"
+        />
+      </Grid>
+      
+    </Grid>
+    <Button
+      type="submit"
+      fullWidth
+      variant="contained"
+      color="primary"
+      className={classes.submit}
+    >
+      Sign Up
+    </Button>
+    <Grid container justify="flex-end">
+      <Grid item>
+        <Link href="#" variant="body2">
+          Already have an account? Sign in
+        </Link>
+      </Grid>
+    </Grid>
+  </form>
+</div>
+</Container>
   );
 };
 
