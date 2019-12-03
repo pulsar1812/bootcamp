@@ -2,38 +2,36 @@ import React, { Fragment, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+// Material UI
 import {
   Typography,
   Avatar,
   Button,
   CssBaseline,
   TextField,
-  FormControlLabel,
-  Checkbox,
   Link,
   Grid,
-  Box,
   Container
-} from "@material-ui/core";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import { makeStyles } from "@material-ui/core/styles";
-
+} from '@material-ui/core';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import { makeStyles } from '@material-ui/core/styles';
+// Action creators
 import { setAlert } from '../../redux/actions/alertActions';
 import { register } from '../../redux/actions/authActions';
 
 const useStyles = makeStyles(theme => ({
   paper: {
     marginTop: theme.spacing(8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center"
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
   },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main
   },
   form: {
-    width: "100%", // Fix IE 11 issue.
+    width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(3)
   },
   submit: {
@@ -69,122 +67,97 @@ const Register = ({ isAuthenticated, setAlert, register }) => {
 
   return (
     <Fragment>
-      <h1 className='large text-primary'>Sign Up</h1>
-      <p className='lead'>
-        <i className='fas fa-user'></i> Create Your Account
-      </p>
-      <form className='form' onSubmit={event => handleSubmit(event)}>
-        <div className='form-group'>
-          <input
-            type='text'
-            placeholder='Name'
-            name='name'
-            value={name}
-            onChange={event => handleChange(event)}
-          />
+      <Container component='main' maxWidth='xs'>
+        <CssBaseline />
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component='h1' variant='h5'>
+            Sign Up
+          </Typography>
+          <form
+            className={classes.form}
+            noValidate
+            onSubmit={event => handleSubmit(event)}
+          >
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  autoComplete='fname'
+                  name='name'
+                  variant='outlined'
+                  required
+                  fullWidth
+                  id='name'
+                  label='Name'
+                  autoFocus
+                  value={name}
+                  onChange={event => handleChange(event)}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant='outlined'
+                  required
+                  fullWidth
+                  id='email'
+                  label='Email Address'
+                  name='email'
+                  autoComplete='email'
+                  value={email}
+                  onChange={event => handleChange(event)}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant='outlined'
+                  required
+                  fullWidth
+                  name='password'
+                  label='Password'
+                  type='password'
+                  id='password'
+                  autoComplete='current-password'
+                  value={password}
+                  onChange={event => handleChange(event)}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant='outlined'
+                  required
+                  fullWidth
+                  name='role'
+                  label='Role'
+                  type='text'
+                  id='role'
+                  autoComplete='role'
+                  value={role}
+                  onChange={event => handleChange(event)}
+                />
+              </Grid>
+            </Grid>
+            <Button
+              type='submit'
+              fullWidth
+              variant='contained'
+              color='primary'
+              className={classes.submit}
+            >
+              Sign Up
+            </Button>
+            <Grid container justify='flex-end'>
+              <Grid item>
+                <Link href='#' variant='body2'>
+                  Already have an account? Sign in
+                </Link>
+              </Grid>
+            </Grid>
+          </form>
         </div>
-        <div className='form-group'>
-          <input
-            type='email'
-            placeholder='Email Address'
-            name='email'
-            value={email}
-            onChange={event => handleChange(event)}
-          />
-        </div>
-        <div className='form-group'>
-          <input
-            type='password'
-            placeholder='Password'
-            name='password'
-            minLength='6'
-            value={password}
-            onChange={event => handleChange(event)}
-          />
-        </div>
-        <div className='form-group'>
-          <input
-            type='text'
-            placeholder='Role'
-            name='role'
-            value={role}
-            onChange={event => handleChange(event)}
-          />
-        </div>
-        <input type='submit' className='btn btn-primary' value='Register' />
-      </form>
-      <p className='my-1'>
-        Already have an account? <Link to='/login'>Sign In</Link>
-      </p>
+      </Container>
     </Fragment>
-
-<Container component="main" maxWidth="xs">
-<CssBaseline />
-<div className={classes.paper}>
-  <Avatar className={classes.avatar}>
-    <LockOutlinedIcon />
-  </Avatar>
-  <Typography component="h1" variant="h5">
-    Sign up
-  </Typography>
-  <form className={classes.form} noValidate>
-    <Grid container spacing={2}>
-      <Grid item xs={12}>
-        <TextField
-          autoComplete="fname"
-          name="name"
-          variant="outlined"
-          required
-          fullWidth
-          id="name"
-          label="Name"
-          autoFocus
-        />
-      </Grid>
-      <Grid item xs={12}>
-        <TextField
-          variant="outlined"
-          required
-          fullWidth
-          id="email"
-          label="Email Address"
-          name="email"
-          autoComplete="email"
-        />
-      </Grid>
-      <Grid item xs={12}>
-        <TextField
-          variant="outlined"
-          required
-          fullWidth
-          name="password"
-          label="Password"
-          type="password"
-          id="password"
-          autoComplete="current-password"
-        />
-      </Grid>
-      
-    </Grid>
-    <Button
-      type="submit"
-      fullWidth
-      variant="contained"
-      color="primary"
-      className={classes.submit}
-    >
-      Sign Up
-    </Button>
-    <Grid container justify="flex-end">
-      <Grid item>
-        <Link href="#" variant="body2">
-          Already have an account? Sign in
-        </Link>
-      </Grid>
-    </Grid>
-  </form>
-</div>
-</Container>
   );
 };
 

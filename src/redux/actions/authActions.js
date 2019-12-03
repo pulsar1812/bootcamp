@@ -12,7 +12,7 @@ import {
 import { setAlert } from './alertActions';
 import setAuthToken from '../../utils/setAuthToken';
 
-const baseUrl = 'https://www.blockchainshenzhen.com/api/v1';
+const baseUrl = 'http://localhost:5000/api/v1';
 
 // Load User
 export const loadUser = () => async dispatch => {

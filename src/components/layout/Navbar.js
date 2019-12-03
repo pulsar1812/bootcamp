@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+// Material UI
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Typography,
@@ -10,7 +11,7 @@ import {
   IconButton
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-
+// Action creators
 import { logout } from '../../redux/actions/authActions';
 
 const useStyles = makeStyles(theme => ({
