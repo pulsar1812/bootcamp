@@ -15,7 +15,7 @@ import {
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { makeStyles } from '@material-ui/core/styles';
-// Action creators
+// Action Creators
 import { setAlert } from '../../redux/actions/alertActions';
 import { register } from '../../redux/actions/authActions';
 
@@ -126,7 +126,6 @@ const Register = ({ isAuthenticated, setAlert, register }) => {
               <Grid item xs={12}>
                 <TextField
                   variant='outlined'
-                  required
                   fullWidth
                   name='role'
                   label='Role'

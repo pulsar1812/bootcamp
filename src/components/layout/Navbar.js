@@ -11,7 +11,7 @@ import {
   IconButton
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-// Action creators
+// Action Creators
 import { logout } from '../../redux/actions/authActions';
 
 const useStyles = makeStyles(theme => ({

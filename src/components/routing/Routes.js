@@ -1,9 +1,9 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import Dashboard from '../dashboard/Dashboard';
 import Login from '../auth/Login';
 import Register from '../auth/Register';
+import Dashboard from '../dashboard/Dashboard';
 import Bootcamps from '../bootcamps/Bootcamps';
 import Alert from '../layout/Alert';
 import NotFound from '../layout/NotFound';
